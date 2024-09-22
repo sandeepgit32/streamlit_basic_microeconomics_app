@@ -1,7 +1,7 @@
 # Ice Cream Market Theory Basics
 
 ## Overview
-This project explores the relationship between the price of ice cream and the quantity demanded using a Streamlit application. The application displays a table and a graph to illustrate how demand changes with price.
+This project examines the fundamentals of microeconomics by analyzing the relationship between the price of ice cream and the quantity demanded, presented through a Streamlit application.
 
 ## Setup
 To set up the project, follow these steps:
