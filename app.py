@@ -617,3 +617,141 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 st.write("")
+
+# Equilibrium values
+equilibrium_price = 4
+equilibrium_quantity = 40
+
+# Shortage situation
+st.subheader("🍨 Government Interventions - Price Floor and Ceiling")
+
+
+st.write("""
+Sometimes governments intervene to control prices. Let's see how two interventions – **price ceilings** and **price floors** – affect the market and what unintended consequences may arise:
+
+- If the government thinks ice cream sellers are not getting proper price for their ice cream, it might impose a **price floor** above the equilibrium price, for example, at $5. While sellers would love to sell at such a high price, buyers aren't willing to purchase as much. This leads to a surplus of 20 scoops, with unsold ice cream piling up. Sellers may be tempted to sell scoops illegally below the floor price, creating **black market** conditions.
+
+- On the other hand, if the government thinks ice cream is too expensive for everyone to afford, it may set a **price ceiling** below the equilibrium price, say  at $3. While this makes ice cream cheaper for buyers, it creates a shortage of 20 scoopps because at such a low price, sellers aren't willing to supply enough scoops. This scarcity can lead to **black markets**, where people sell ice cream illegally at higher prices.
+""")
+
+# # User inputs for price floor and price ceiling
+# price_floor = st.slider("Set Price Floor (in $)", min_value=4, max_value=7, value=5)
+# price_ceiling = st.slider("Set Price Ceiling (in $)", min_value=1, max_value=4, value=3)
+
+price_floor = 5
+price_ceiling = 3
+
+
+# Plotting the demand and supply curves with price floor and price ceiling
+plt.figure(figsize=(7, 5))
+
+# Demand curve
+plt.plot(df["Quantity Demanded (in scoops)"], df["Price (in $)"], label="Demand", color='blue', linewidth=2)
+# Supply curve
+plt.plot(df["Quantity Supplied (in scoops)"], df["Price (in $)"], label="Supply", color='green', linewidth=2)
+
+# Price floor line
+plt.axhline(y=price_floor, color='red', linestyle='-', linewidth=1.5)
+plt.text(8, price_floor + 0.16, "Price Floor = 5$", color='red', fontsize=8, va='center')
+plt.text(8, price_floor - 0.2, "Shortage = 20 scoops", color='red', fontsize=8, va='center')
+
+# Price ceiling line
+plt.axhline(y=price_ceiling, color='purple', linestyle='-', linewidth=1.5)
+plt.text(8, price_ceiling + 0.16, "Price Ceiling = 3$", color='purple', fontsize=8, va='center')
+plt.text(8, price_ceiling - 0.2, "Surplus = 20 scoops", color='purple', fontsize=8, va='center')
+
+
+# Equilibrium line
+plt.axvline(x=equilibrium_quantity, color='black', linestyle='--', linewidth=1)
+plt.axhline(y=equilibrium_price, color='black', linestyle='--', linewidth=1)
+plt.scatter([equilibrium_quantity], [equilibrium_price], color='k', zorder=5, label='Equilibrium Point', s=50)
+
+# Labels and title
+plt.xlabel("Quantity (in scoops)")
+plt.ylabel("Price (in $)")
+plt.title("Effects of Price Floor and Price Ceiling on the Ice Cream Market")
+plt.legend(fontsize=7, loc='best')
+plt.grid(alpha=0.3)
+
+# Display the plot
+st.pyplot(plt)
+
+# Explanation of effects
+
+st.markdown("""
+<div style="border: 2px solid #D9E7FF; background-color: #D9E7FF; padding: 10px; border-radius: 5px; margin: 10px 160px; box-shadow: 2px 2px 5px rgba(0.2, 0.2, 0.2, 0.5);">
+    <img src="https://img.icons8.com/ios-filled/50/000000/pin.png" alt="Pin" style="width: 20px; height: 20px; margin-right: 10px;">
+    Government interventions can have unintended consequences on the market:
+    <ul>
+    <li><strong>Price Ceiling</strong> - If set below equilibrium, it creates a <strong>shortage</strong> as fewer sellers participate. A <strong>black market</strong> may emerge where ice cream is resold at higher prices.</li>
+    <li><strong>Price Floor</strong> - If set above equilibrium, it leads to a <strong>surplus</strong> since buyers purchase less. This can drive sellers to the <strong>black market</strong>, selling below the floor.</li>
+</ul>
+</div>
+""", unsafe_allow_html=True)
+st.write("")
+
+
+# # Tax impact section
+# st.subheader("🍨 Effect of Tax on Supply and Demand")
+
+# st.write("""
+# When a tax is imposed on ice cream sellers, it increases their costs. This typically leads to a leftward shift in the supply curve, resulting in a higher equilibrium price and lower equilibrium quantity.
+
+# Let's visualize how this change affects the equilibrium point.
+# """)
+
+# # User input for tax amount
+# tax_amount = 1
+
+# # Calculate new supply quantities based on tax
+# df["Quantity Supplied After Tax (in scoops)"] = df["Quantity Supplied (in scoops)"] - tax_amount * 10  # Adjust quantity for tax impact
+
+# # Plotting the demand and supply curves with tax effect
+# plt.figure(figsize=(7, 5))
+
+# # Demand curve
+# plt.plot(df["Quantity Demanded (in scoops)"], df["Price (in $)"], label="Demand", color='blue', linewidth=2)
+# # Original supply curve
+# plt.plot(df["Quantity Supplied (in scoops)"], df["Price (in $)"], label="Original Supply", color='green', linestyle='--', linewidth=2)
+# # Supply curve after tax
+# plt.plot(df["Quantity Supplied After Tax (in scoops)"], df["Price (in $)"], label="Supply After Tax", color='orange', linewidth=2)
+
+# # Highlighting equilibrium points
+# plt.scatter([equilibrium_quantity], [equilibrium_price], color='k', label='Original Equilibrium Point', s=50)
+# new_equilibrium_price = 4.5  # Adjusted equilibrium price
+# new_equilibrium_quantity = 35  # Adjusted equilibrium quantity
+
+# # Labels and title
+# plt.xlabel("Quantity (in scoops)")
+# plt.ylabel("Price (in $)")
+# plt.title("Effects of Tax on Ice Cream Market")
+# plt.axhline(new_equilibrium_price, color='red', linestyle='--', linewidth=1)
+# plt.axvline(new_equilibrium_quantity, color='red', linestyle='--', linewidth=1)
+# plt.scatter([new_equilibrium_quantity], [new_equilibrium_price], color='red', label='New Equilibrium Point', s=50)
+# plt.legend(fontsize=7, loc='best')
+# plt.grid(alpha=0.3)
+
+# # Display the plot
+# st.pyplot(plt)
+
+# st.write("""
+# In the chart:
+# - The **blue curve** represents the demand for ice cream.
+# - The **dotted green curve** shows the original supply of ice cream.
+# - The **orange curve** shows the new supply after the tax is imposed.
+
+# As a result of the tax:
+# - The original equilibrium point is marked in **black**, where the original demand and supply intersect.
+# - The new equilibrium point is marked in **red**, where the new supply intersects with the same demand curve.
+
+# This shift indicates that at the new equilibrium, the price of ice cream is higher due to the tax, demonstrating how markets respond to taxation!
+# """)
+
+# st.markdown("""
+# <div style="border: 2px solid #D9E7FF; background-color: #D9E7FF; padding: 10px; border-radius: 5px; margin: 10px 160px; box-shadow: 2px 2px 5px rgba(0.2, 0.2, 0.2, 0.5);">
+#     <img src="https://img.icons8.com/ios-filled/50/000000/pin.png" alt="Pin" style="width: 20px; height: 20px; margin-right: 10px;">
+#     When a tax is imposed, it not only raises the price for consumers but also reduces the quantity sold in the market.
+# </div>
+# """, unsafe_allow_html=True)
+
+# st.write("")
