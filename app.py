@@ -651,9 +651,9 @@ plt.plot(df["Quantity Demanded (in scoops)"], df["Price (in $)"], label="Demand"
 plt.plot(df["Quantity Supplied (in scoops)"], df["Price (in $)"], label="Supply", color='green', linewidth=2)
 
 # Price floor line
-plt.axhline(y=price_floor, color='red', linestyle='-', linewidth=1.5)
-plt.text(8, price_floor + 0.16, "Price Floor = 5$", color='red', fontsize=8, va='center')
-plt.text(8, price_floor - 0.2, "Shortage = 20 scoops", color='red', fontsize=8, va='center')
+plt.axhline(y=price_floor, color='magenta', linestyle='-', linewidth=1.5)
+plt.text(8, price_floor + 0.16, "Price Floor = 5$", color='magenta', fontsize=8, va='center')
+plt.text(8, price_floor - 0.2, "Shortage = 20 scoops", color='magenta', fontsize=8, va='center')
 
 # Price ceiling line
 plt.axhline(y=price_ceiling, color='purple', linestyle='-', linewidth=1.5)
@@ -662,9 +662,9 @@ plt.text(8, price_ceiling - 0.2, "Surplus = 20 scoops", color='purple', fontsize
 
 
 # Equilibrium line
-plt.axvline(x=equilibrium_quantity, color='black', linestyle='--', linewidth=1)
-plt.axhline(y=equilibrium_price, color='black', linestyle='--', linewidth=1)
-plt.scatter([equilibrium_quantity], [equilibrium_price], color='k', zorder=5, label='Equilibrium Point', s=50)
+plt.axvline(x=equilibrium_quantity, color='red', linestyle='--', linewidth=1)
+plt.axhline(y=equilibrium_price, color='red', linestyle='--', linewidth=1)
+plt.scatter([equilibrium_quantity], [equilibrium_price], color='red', zorder=5, label='Equilibrium Point', s=50)
 
 # Labels and title
 plt.xlabel("Quantity (in scoops)")
