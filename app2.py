@@ -1,6 +1,12 @@
-import streamlit as st
+import numpy as np
 import pandas as pd
-import plotly.graph_objects as go
+import streamlit as st
+import matplotlib.pyplot as plt
+
+st.set_page_config(
+    page_icon="🍨",
+    page_title="Ice Cream Market"
+)
 
 # Dummy data for ice-cream sales
 data = {
@@ -8,61 +14,93 @@ data = {
     "Quantity Demanded (in scoops)": [70, 60, 50, 40, 30, 20, 10],
     "Quantity Supplied (in scoops)": [10, 20, 30, 40, 50, 60, 70]
 }
+
+# Convert the data into a pandas DataFrame
 df = pd.DataFrame(data)
 
-# Equilibrium point for illustration
-equilibrium_price = 4
-equilibrium_quantity = 40
+# Streamlit app
+st.title("🍨 Ice Cream Market - Supply and Demand")
 
-# User inputs for price floor and price ceiling
-price_floor = st.slider("Set Price Floor (in $)", min_value=4, max_value=7, value=5)
-price_ceiling = st.slider("Set Price Ceiling (in $)", min_value=1, max_value=4, value=3)
+st.write("""
+Welcome to the Ice Cream Market! Here, we’ll learn how prices are set in the ice cream market. We'll explore how the **price** of ice cream affects the amount people who want to **buy** (demand) and the amount sellers who want to **sell** (supply). 
+Let’s dive into this journey step by step!
+""")
 
-# Plotting with Plotly
-fig = go.Figure()
+# Display the demand data in table
+st.write("""
+<style>
+    table {
+        margin-left: auto;
+        margin-right: auto;
+        width: 50%; /* Adjust width as needed */
+    }
+    td, th {
+        text-align: center;
+        padding: 8px;
+    }
+</style>
+""" + df[["Price (in $)", "Quantity Demanded (in scoops)"]].to_html(index=False), unsafe_allow_html=True)
 
-# Add demand curve with increased line thickness
-fig.add_trace(go.Scatter(x=df["Quantity Demanded (in scoops)"], y=df["Price (in $)"], 
-                         mode='lines', name='Demand', line=dict(color='blue', width=3)))
-# Add supply curve with increased line thickness
-fig.add_trace(go.Scatter(x=df["Quantity Supplied (in scoops)"], y=df["Price (in $)"], 
-                         mode='lines', name='Supply', line=dict(color='green', width=3)))
+# Add a line break
+st.write("")
 
-# Add price floor line with bold annotation
-fig.add_hline(y=price_floor, line_dash="dash", line_color='red', 
-               annotation_text=f"<b>Price Floor = ${price_floor}</b>", 
-               annotation_position="top left", 
-               annotation_font=dict(size=14, color='red', family='Arial'))
+st.write("""    
+Let's look at the graph below to see how demand changes with the price.
+""")
 
-# Add price ceiling line with bold annotation
-fig.add_hline(y=price_ceiling, line_dash="dash", line_color='purple', 
-               annotation_text=f"<b>Price Ceiling = ${price_ceiling}</b>", 
-               annotation_position="bottom left", 
-               annotation_font=dict(size=14, color='purple', family='Arial'))
+# Number input for price
+price = st.number_input("Enter the Price of Ice Cream (in $)", min_value=1, max_value=7, value=4)
+# Calculate the corresponding quantity demanded and supplied based on the price
+quantity_demanded = df.loc[df["Price (in $)"] == price, "Quantity Demanded (in scoops)"].values[0]
+# Update data based on user input
+df.loc[df["Price (in $)"] == price, "Quantity Demanded (in scoops)"] = quantity_demanded
 
-# Add equilibrium point
-fig.add_hline(y=equilibrium_price, line_dash="dot", line_color="black")
-fig.add_vline(x=equilibrium_quantity, line_dash="dot", line_color="black")
-fig.add_trace(go.Scatter(x=[equilibrium_quantity], y=[equilibrium_price], 
-                         mode="markers", marker=dict(color="black", size=12), name="Equilibrium"))
-
-# Layout settings with figure size
-fig.update_layout(
-    title="Effects of Price Floor and Price Ceiling on the Ice Cream Market",
-    xaxis_title="Quantity (in scoops)",
-    yaxis_title="Price (in $)",
-    legend_title="Legend",
-    template="plotly_white",
-    margin=dict(l=60, r=60, t=60, b=60),
-    height=550,
-    width=700,
+# Plotting demand curve only
+plt.figure(figsize=(7, 5))
+plt.plot(df["Quantity Demanded (in scoops)"], df["Price (in $)"], label="Demand (People want to buy)", color='blue', linewidth=2, alpha=0.4)
+plt.xlabel("Quantity Demanded (in scoops)")
+plt.ylabel("Price (in $)")
+plt.title("Demand Curve for Ice Cream")
+plt.grid(alpha=0.3)
+plt.legend(fontsize=7, loc='best')
+plt.scatter(df["Quantity Demanded (in scoops)"], df["Price (in $)"], color='blue', s=40, alpha=0.4)
+# Highlight the operating point
+plt.scatter(quantity_demanded, price, color='k', s=100, zorder=5, label='Operating Point')
+# Add annotation for the demand value
+plt.annotate(
+    f'{quantity_demanded} scoops',
+    xy=(quantity_demanded, price),
+    xytext=(quantity_demanded + 2, price),
+    fontsize=9,
+    verticalalignment='center'
 )
+plt.legend(fontsize=7, loc='best')
 
-# Update axis titles and tick labels with specific font size
-fig.update_xaxes(title_font=dict(size=16, color='black', family='Arial'),
-                 tickfont=dict(size=18, color='black'))
-fig.update_yaxes(title_font=dict(size=16, color='black', family='Arial'),
-                 tickfont=dict(size=18, color='black'))
+st.pyplot(plt)
 
-# Display the plot
-st.plotly_chart(fig)
+# Interactive input for external factors
+external_factor = st.number_input("Enter the change in quantity demanded due to external factors (e.g., event)", value=20)
+
+# Adjusting the demand data based on external factors
+df['New Quantity Demanded (in scoops)'] = df['Quantity Demanded (in scoops)'] + external_factor
+
+# Plotting both original and new demand curves
+plt.figure(figsize=(7, 5))
+plt.plot(df["Quantity Demanded (in scoops)"], df["Price (in $)"], label="Original Demand", color='blue', linestyle='--', linewidth=2)  # Dotted line for original demand
+plt.plot(df["New Quantity Demanded (in scoops)"], df["Price (in $)"], label="New Demand (after event)", color='blue', linewidth=2)  # Solid line for new demand
+plt.xlabel("Quantity Demanded (in scoops)")
+plt.ylabel("Price (in $)")
+plt.title("Effect of External Factors on Demand for Ice Cream")
+plt.legend(fontsize=7, loc='best')
+plt.grid(alpha=0.3)
+plt.scatter(df["Quantity Demanded (in scoops)"], df["Price (in $)"], color='blue', s=50)
+plt.scatter(df["New Quantity Demanded (in scoops)"], df["Price (in $)"], color='blue', s=50)
+
+# Display the demand change plot
+st.pyplot(plt)
+
+st.write("""
+As you can see from the graph:
+- The **dotted blue curve** represents the original demand for ice cream.
+- The **solid blue curve** shows how demand increases due to external factors, like a popular event.
+""")
