@@ -22,7 +22,7 @@ df = pd.DataFrame(data)
 st.title("🍨 Ice Cream Market - Supply and Demand")
 
 st.write("""
-Welcome to the Ice Cream Market! Here, we’ll learn how prices are set in the ice cream market. We'll explore how the **price** of ice cream affects the amount people who want to **buy** (demand) and the amount sellers who want to **sell** (supply). 
+Welcome to an imaginary Ice Cream Market! Here, we’ll learn how prices are set in the ice cream market. We'll explore how the **price** of ice cream affects the amount people who want to **buy** (demand) and the amount sellers who want to **sell** (supply). 
 Let’s dive into this journey step by step!
 """)
 
@@ -67,7 +67,7 @@ quantity_demanded = df.loc[df["Price (in $)"] == price, "Quantity Demanded (in s
 # Update data based on user input
 df.loc[df["Price (in $)"] == price, "Quantity Demanded (in scoops)"] = quantity_demanded
 
-col1, col2, col3 = st.columns([1, 10, 1])
+col1, col2, col3 = st.columns([1, 12, 1])
 
 with col2:
     # Plotting demand curve only
@@ -149,7 +149,7 @@ quantity_supplied = df.loc[df["Price (in $)"] == price, "Quantity Supplied (in s
 # Update data based on user input
 df.loc[df["Price (in $)"] == price, "Quantity Supplied (in scoops)"] = quantity_supplied
 
-cpl1, col2, col3 = st.columns([1, 10, 1])
+cpl1, col2, col3 = st.columns([1, 12, 1])
 with col2:
     # Plotting supply curve only
     plt.figure(figsize=(6, 4))
@@ -208,7 +208,7 @@ quantity_supplied = df.loc[df["Price (in $)"] == price, "Quantity Supplied (in s
 df.loc[df["Price (in $)"] == price, "Quantity Demanded (in scoops)"] = quantity_demanded
 df.loc[df["Price (in $)"] == price, "Quantity Supplied (in scoops)"] = quantity_supplied
 
-col1, col2, col3 = st.columns([1, 10, 1])
+col1, col2, col3 = st.columns([1, 12, 1])
 
 with col2:
     # Plotting demand and supply curves
@@ -283,7 +283,7 @@ quantity_supplied = df.loc[df["Price (in $)"] == price, "Quantity Supplied (in s
 df.loc[df["Price (in $)"] == price, "Quantity Demanded (in scoops)"] = quantity_demanded
 df.loc[df["Price (in $)"] == price, "Quantity Supplied (in scoops)"] = quantity_supplied
 
-col1, col2, col3 = st.columns([1, 10, 1])
+col1, col2, col3 = st.columns([1, 12, 1])
 
 with col2:
     # Plotting demand and supply curves
@@ -325,6 +325,7 @@ with col2:
         plt.fill_betweenx([price - 0.1, price + 0.1], quantity_supplied, quantity_demanded, color='red', alpha=0.2, label=f'Shortage: {quantity_demanded - quantity_supplied} scoops')
     elif quantity_supplied > quantity_demanded:
         plt.fill_betweenx([price - 0.1, price + 0.1], quantity_demanded, quantity_supplied, color='purple', alpha=0.2, label=f'Surplus: {quantity_supplied - quantity_demanded} scoops')
+
     
     plt.legend(fontsize=7, loc='center left')
     st.pyplot(plt)
@@ -356,7 +357,7 @@ When there is a **surplus** or **shortage**, sellers and buyers react:
 Somewhere in the middle, the amount people want to buy equals the amount sellers want to sell. This is called **equilibrium**. The market will naturally move towards this point where everyone is happy!
 """)
 
-col1, col2, col3 = st.columns([1, 10, 1])
+col1, col2, col3 = st.columns([1, 12, 1])
 
 with col2:
     # Plotting both demand and supply curves for equilibrium
@@ -367,15 +368,33 @@ with col2:
     # Highlighting the equilibrium point
     equilibrium_price = 4  # From the data
     equilibrium_quantity = 40  # From the data
-    plt.scatter([equilibrium_quantity], [equilibrium_price], color='k', zorder=5, label='Equilibrium Point', s=50)
+    plt.scatter([equilibrium_quantity], [equilibrium_price], color='k', zorder=5, label='Equilibrium Point', s=70)
 
     plt.xlabel("Quantity (in scoops)")
     plt.ylabel("Price (in $)")
     # plt.title("Supply and Demand: Moving Towards Equilibrium")
-    plt.axhline(equilibrium_price, color='red', linestyle='--', linewidth=1, alpha=0.4)
-    plt.axvline(equilibrium_quantity, color='red', linestyle='--', linewidth=1, alpha=0.4)
-    plt.legend(fontsize=7, loc='best')
+    # plt.axhline(equilibrium_price, color='red', linestyle='--', linewidth=1, alpha=0.4)
+    # plt.axvline(equilibrium_quantity, color='red', linestyle='--', linewidth=1, alpha=0.4)
+    plt.legend(fontsize=7, loc='center left')
     plt.grid(alpha=0.3)
+
+    # Add annotation for the demand value
+    plt.annotate(
+        f'Equilibrium price = {equilibrium_price}$',
+        xy=(equilibrium_quantity, equilibrium_price),
+        xytext=(equilibrium_quantity - 8, equilibrium_price + 0.5),
+        fontsize=9,
+        verticalalignment='center'
+    )
+    
+    # Add annotation for the supply value
+    plt.annotate(
+        f'Equilibrium quantity = {equilibrium_quantity} scoops',
+        xy=(equilibrium_quantity, equilibrium_price),
+        xytext=(equilibrium_quantity + 2, equilibrium_price),
+        fontsize=9,
+        verticalalignment='center'
+    )
 
     # Display the final plot
     st.pyplot(plt)
@@ -407,7 +426,7 @@ with col2:
     # Plotting both original and new demand curves
     plt.figure(figsize=(6, 4))
     plt.plot(df["Quantity Demanded (in scoops)"], df["Price (in $)"], label="Original Demand", color='blue', linestyle='--', linewidth=3, alpha = 0.4)  # Dotted line for original demand
-    plt.plot(df["New Quantity Demanded (in scoops)"], df["Price (in $)"], label="New Demand (after event)", color='blue', linewidth=3, alpha = 0.4)  # Solid line for new demand
+    plt.plot(df["New Quantity Demanded (in scoops)"], df["Price (in $)"], label="Increased Demand", color='blue', linewidth=3, alpha = 0.4)  # Solid line for new demand
     plt.xlabel("Quantity (in scoops)")
     plt.ylabel("Price (in $)")
     # plt.title("Effect of External Factors on Demand for Ice Cream")
@@ -456,36 +475,40 @@ Imagine that the new quantity demanded at each price decreases by 20 scoops due 
 # Adjusting the demand data for decrease
 df['Decreased Quantity Demanded (in scoops)'] = df['Quantity Demanded (in scoops)'] - 20
 
+# Drop the last row to avoid negative values
+df1 = df.copy()
+df1 = df1.drop(df1.index[-1]).reset_index(drop=True)
+
 col1, col2, col3 = st.columns([1, 12, 1])
 with col2:
     # Plotting both original and decreased demand curves
     plt.figure(figsize=(6, 4))
-    plt.plot(df["Quantity Demanded (in scoops)"], df["Price (in $)"], label="Original Demand", color='blue', linestyle='--', linewidth=3, alpha=0.4)  # Dotted line for original demand
-    plt.plot(df["Decreased Quantity Demanded (in scoops)"], df["Price (in $)"], label="Decreased Demand", color='blue', linewidth=3, alpha=0.4)  # Solid line for decreased demand
+    plt.plot(df1["Quantity Demanded (in scoops)"], df1["Price (in $)"], label="Original Demand", color='blue', linestyle='--', linewidth=3, alpha=0.4)  # Dotted line for original demand
+    plt.plot(df1["Decreased Quantity Demanded (in scoops)"], df1["Price (in $)"], label="Decreased Demand", color='blue', linewidth=3, alpha=0.4)  # Solid line for decreased demand
     plt.xlabel("Quantity (in scoops)")
     plt.ylabel("Price (in $)")
     # plt.title("Effect of External Factors on Demand for Ice Cream")
     plt.legend(fontsize=7, loc='best')
     plt.grid(alpha=0.3)
-    plt.scatter(df["Quantity Demanded (in scoops)"], df["Price (in $)"], color='blue', s=50)
-    plt.scatter(df["Decreased Quantity Demanded (in scoops)"], df["Price (in $)"], color='blue', s=50)
+    plt.scatter(df1["Quantity Demanded (in scoops)"], df1["Price (in $)"], color='blue', s=50)
+    plt.scatter(df1["Decreased Quantity Demanded (in scoops)"], df1["Price (in $)"], color='blue', s=50)
 
     # Add annotations for each original demand point
-    for i in range(len(df)):
+    for i in range(len(df1)):
         plt.annotate(
-            f'{df["Quantity Demanded (in scoops)"][i]} scoops',
-            xy=(df["Quantity Demanded (in scoops)"][i], df["Price (in $)"][i]),
-            xytext=(df["Quantity Demanded (in scoops)"][i] + 2, df["Price (in $)"][i]),
+            f'{df1["Quantity Demanded (in scoops)"][i]} scoops',
+            xy=(df1["Quantity Demanded (in scoops)"][i], df1["Price (in $)"][i]),
+            xytext=(df1["Quantity Demanded (in scoops)"][i] + 2, df1["Price (in $)"][i]),
             fontsize=9,
             verticalalignment='center'
         )
         
     # Add annotations for each new demand point
-    for i in range(len(df)):
+    for i in range(len(df1)):
         plt.annotate(
-            f'{df["Decreased Quantity Demanded (in scoops)"][i]} scoops ⟵',
-            xy=(df["Decreased Quantity Demanded (in scoops)"][i], df["Price (in $)"][i]),
-            xytext=(df["Decreased Quantity Demanded (in scoops)"][i] + 2, df["Price (in $)"][i]),
+            f'{df1["Decreased Quantity Demanded (in scoops)"][i]} scoops ⟵',
+            xy=(df1["Decreased Quantity Demanded (in scoops)"][i], df1["Price (in $)"][i]),
+            xytext=(df1["Decreased Quantity Demanded (in scoops)"][i] + 2, df1["Price (in $)"][i]),
             fontsize=9,
             verticalalignment='center'
         )
@@ -558,12 +581,19 @@ with col2:
 
     plt.xlabel("Quantity (in scoops)")
     plt.ylabel("Price (in $)")
-    plt.title("Shift in Demand and Its Impact on Equilibrium")
+    # plt.title("Shift in Demand and Its Impact on Equilibrium")
     plt.legend(fontsize=7, loc='best')
     plt.grid(alpha=0.3)
 
     # Add annotations for each new demand point
     for i in range(len(df)):
+        plt.annotate(
+            f'{df["Quantity Demanded (in scoops)"][i]}',
+            xy=(df["Quantity Demanded (in scoops)"][i], df["Price (in $)"][i]),
+            xytext=(df["Quantity Demanded (in scoops)"][i] + 2, df["Price (in $)"][i]),
+            fontsize=9,
+            verticalalignment='center'
+        )
         plt.annotate(
             f'{df["New Quantity Demanded (in scoops)"][i]}',
             xy=(df["New Quantity Demanded (in scoops)"][i], df["Price (in $)"][i]),
@@ -578,7 +608,7 @@ with col2:
 st.write("""
 In the chart:
 - The **dotted blue curve** represents the original demand for ice cream.
-- The **solid blue curve** shows the new demand after the event, which shifts to the right.
+- The **solid blue curve** shows the new demand after the event, which shifts to the right or left.
 - The **green line** represents the supply curve.
 
 As a result of the increased demand, the equilibrium point shifts:
@@ -622,7 +652,7 @@ with col2:
     # Plotting both original and new supply curves
     plt.figure(figsize=(6, 4))
     plt.plot(df["Quantity Supplied (in scoops)"], df["Price (in $)"], label="Original Supply", color='green', linestyle='--', linewidth=3, alpha=0.4)  # Dotted line for original supply
-    plt.plot(df["New Quantity Supplied (in scoops)"], df["Price (in $)"], label="New Supply (after event)", color='green', linewidth=3, alpha=0.4)  # Solid line for new supply
+    plt.plot(df["New Quantity Supplied (in scoops)"], df["Price (in $)"], label="Increased Supply", color='green', linewidth=3, alpha=0.4)  # Solid line for new supply
     plt.xlabel("Quantity (in scoops)")
     plt.ylabel("Price (in $)")
     # plt.title("Effect of External Factors on Supply for Ice Cream")
@@ -634,7 +664,7 @@ with col2:
     # Add annotations for each original supply point
     for i in range(len(df)):
         plt.annotate(
-            f'{df["Quantity Supplied (in scoops)"][i]}',
+            f'{df["Quantity Supplied (in scoops)"][i]} scoops ⟶',
             xy=(df["Quantity Supplied (in scoops)"][i], df["Price (in $)"][i]),
             xytext=(df["Quantity Supplied (in scoops)"][i] + 2, df["Price (in $)"][i]),
             fontsize=9,
@@ -644,7 +674,7 @@ with col2:
     # Add annotations for each new supply point
     for i in range(len(df)):
         plt.annotate(
-            f'{df["New Quantity Supplied (in scoops)"][i]}',
+            f'{df["New Quantity Supplied (in scoops)"][i]} scoops',
             xy=(df["New Quantity Supplied (in scoops)"][i], df["Price (in $)"][i]),
             xytext=(df["New Quantity Supplied (in scoops)"][i] + 2, df["Price (in $)"][i]),
             fontsize=9,
@@ -671,36 +701,40 @@ Imagine that the new quantity supplied at each price decreases by 20 scoops due 
 # Adjusting the supply data for decrease
 df['Decreased Quantity Supplied (in scoops)'] = df['Quantity Supplied (in scoops)'] - 20
 
+# Drop the first row to avoid negative values
+df1 = df.copy()
+df1 = df1.drop(df1.index[0]).reset_index(drop=True)
+
 col1, col2, col3 = st.columns([1, 12, 1])
 with col2:
     # Plotting both original and decreased supply curves
     plt.figure(figsize=(6, 4))
-    plt.plot(df["Quantity Supplied (in scoops)"], df["Price (in $)"], label="Original Supply", color='green', linestyle='--', linewidth=3, alpha=0.4)  # Dotted line for original supply
-    plt.plot(df["Decreased Quantity Supplied (in scoops)"], df["Price (in $)"], label="Decreased Supply (after event)", color='green', linewidth=3, alpha=0.4)  # Solid line for decreased supply
+    plt.plot(df1["Quantity Supplied (in scoops)"], df1["Price (in $)"], label="Original Supply", color='green', linestyle='--', linewidth=3, alpha=0.4)  # Dotted line for original supply
+    plt.plot(df1["Decreased Quantity Supplied (in scoops)"], df1["Price (in $)"], label="Decreased Supply (after event)", color='green', linewidth=3, alpha=0.4)  # Solid line for decreased supply
     plt.xlabel("Quantity (in scoops)")
     plt.ylabel("Price (in $)")
     # plt.title("Effect of External Factors on Supply for Ice Cream")
     plt.legend(fontsize=7, loc='best')
     plt.grid(alpha=0.3)
-    plt.scatter(df["Quantity Supplied (in scoops)"], df["Price (in $)"], color='green', s=50)
-    plt.scatter(df["Decreased Quantity Supplied (in scoops)"], df["Price (in $)"], color='green', s=50)
+    plt.scatter(df1["Quantity Supplied (in scoops)"], df1["Price (in $)"], color='green', s=50)
+    plt.scatter(df1["Decreased Quantity Supplied (in scoops)"], df1["Price (in $)"], color='green', s=50)
 
     # Add annotations for each original supply point
-    for i in range(len(df)):
+    for i in range(len(df1)):
         plt.annotate(
-            f'{df["Quantity Supplied (in scoops)"][i]}',
-            xy=(df["Quantity Supplied (in scoops)"][i], df["Price (in $)"][i]),
-            xytext=(df["Quantity Supplied (in scoops)"][i] + 2, df["Price (in $)"][i]),
+            f'{df1["Quantity Supplied (in scoops)"][i]} scoops',
+            xy=(df1["Quantity Supplied (in scoops)"][i], df1["Price (in $)"][i]),
+            xytext=(df1["Quantity Supplied (in scoops)"][i] + 2, df1["Price (in $)"][i]),
             fontsize=9,
             verticalalignment='center'
         )
 
     # Add annotations for each decreased supply point
-    for i in range(len(df)):
+    for i in range(len(df1)):
         plt.annotate(
-            f'{df["Decreased Quantity Supplied (in scoops)"][i]}',
-            xy=(df["Decreased Quantity Supplied (in scoops)"][i], df["Price (in $)"][i]),
-            xytext=(df["Decreased Quantity Supplied (in scoops)"][i] + 2, df["Price (in $)"][i]),
+            f'{df1["Decreased Quantity Supplied (in scoops)"][i]} scoops ⟵',
+            xy=(df1["Decreased Quantity Supplied (in scoops)"][i], df1["Price (in $)"][i]),
+            xytext=(df1["Decreased Quantity Supplied (in scoops)"][i] + 2, df1["Price (in $)"][i]),
             fontsize=9,
             verticalalignment='center'
         )
@@ -726,7 +760,7 @@ Let's visualize how this change affects the equilibrium point.
 """)
 
 # User input for supply shift
-supply_shift = st.slider("Supply Shift (in scoops)", min_value=-40, max_value=40, value=0, step=10)
+supply_shift = st.slider("Supply Shift (in scoops)", min_value=-40, max_value=40, value=10, step=10)
 
 # Calculate new supply based on the shift
 df["New Quantity Supplied (in scoops)"] = df["Quantity Supplied (in scoops)"] + supply_shift
@@ -774,7 +808,7 @@ with col2:
 
     plt.xlabel("Quantity (in scoops)")
     plt.ylabel("Price (in $)")
-    plt.title("Shift in Supply and Its Impact on Equilibrium")
+    # plt.title("Shift in Supply and Its Impact on Equilibrium")
     plt.legend(fontsize=7, loc='best')
     plt.grid(alpha=0.3)
 
@@ -842,47 +876,57 @@ Sometimes governments intervene to control prices. Let's see how two interventio
 - On the other hand, if the government thinks ice cream is too expensive for everyone to afford, it may set a **price ceiling** below the equilibrium price, say  at $3. While this makes ice cream cheaper for buyers, it creates a shortage of 20 scoopps because at such a low price, sellers aren't willing to supply enough scoops. This scarcity can lead to **black markets**, where people sell ice cream illegally at higher prices.
 """)
 
-# # User inputs for price floor and price ceiling
-# price_floor = st.slider("Set Price Floor (in $)", min_value=4, max_value=7, value=5)
-# price_ceiling = st.slider("Set Price Ceiling (in $)", min_value=1, max_value=4, value=3)
+# User inputs for price floor and price ceiling
+price_floor = st.slider("Set Price Floor (in $)", min_value=4, max_value=7, value=5)
+price_ceiling = st.slider("Set Price Ceiling (in $)", min_value=1, max_value=4, value=3)
 
-price_floor = 5
-price_ceiling = 3
+# Calculate the corresponding quantity demanded and supplied based on the price_floor and price_ceiling
+quantity_demanded_at_price_floor = df.loc[df["Price (in $)"] == price_floor, "Quantity Demanded (in scoops)"].values[0]
+quantity_supplied_at_price_floor = df.loc[df["Price (in $)"] == price_floor, "Quantity Supplied (in scoops)"].values[0]
+shortage = quantity_supplied_at_price_floor - quantity_demanded_at_price_floor
+
+quantity_demanded_at_price_ceiling = df.loc[df["Price (in $)"] == price_ceiling, "Quantity Demanded (in scoops)"].values[0]
+quantity_supplied_at_price_ceiling = df.loc[df["Price (in $)"] == price_ceiling, "Quantity Supplied (in scoops)"].values[0]
+surplus = quantity_demanded_at_price_ceiling - quantity_supplied_at_price_ceiling
+
+# price_floor = 5
+# price_ceiling = 3
+
+col1, col2, col3 = st.columns([1, 12, 1])
+with col2:
+    # Plotting the demand and supply curves with price floor and price ceiling
+    plt.figure(figsize=(6, 4))
+
+    # Demand curve
+    plt.plot(df["Quantity Demanded (in scoops)"], df["Price (in $)"], label="Demand", color='blue', linewidth=3, alpha=0.4)
+    # Supply curve
+    plt.plot(df["Quantity Supplied (in scoops)"], df["Price (in $)"], label="Supply", color='green', linewidth=3, alpha=0.4)
+
+    # Price floor line
+    plt.axhline(y=price_floor, color='magenta', linestyle='-', linewidth=1.5, alpha=0.4)
+    plt.text(8, price_floor + 0.16, "Price Floor = 5$", color='magenta', fontsize=8, va='center')
+    plt.text(8, price_floor - 0.2, f"Shortage = {shortage} scoops", color='magenta', fontsize=8, va='center')
+
+    # Price ceiling line
+    plt.axhline(y=price_ceiling, color='purple', linestyle='-', linewidth=1.5, alpha=0.4)
+    plt.text(8, price_ceiling + 0.16, "Price Ceiling = 3$", color='purple', fontsize=8, va='center')
+    plt.text(8, price_ceiling - 0.2, f"Surplus = {surplus} scoops", color='purple', fontsize=8, va='center')
 
 
-# Plotting the demand and supply curves with price floor and price ceiling
-plt.figure(figsize=(6, 4))
+    # Equilibrium line
+    # plt.axvline(x=equilibrium_quantity, color='red', linestyle='--', linewidth=1)
+    # plt.axhline(y=equilibrium_price, color='red', linestyle='--', linewidth=1)
+    plt.scatter([equilibrium_quantity], [equilibrium_price], color='red', zorder=5, label='Equilibrium Point', s=50)
 
-# Demand curve
-plt.plot(df["Quantity Demanded (in scoops)"], df["Price (in $)"], label="Demand", color='blue', linewidth=3)
-# Supply curve
-plt.plot(df["Quantity Supplied (in scoops)"], df["Price (in $)"], label="Supply", color='green', linewidth=3)
+    # Labels and title
+    plt.xlabel("Quantity (in scoops)")
+    plt.ylabel("Price (in $)")
+    # plt.title("Effects of Price Floor and Price Ceiling on the Ice Cream Market")
+    plt.legend(fontsize=7, loc='best')
+    plt.grid(alpha=0.3)
 
-# Price floor line
-plt.axhline(y=price_floor, color='magenta', linestyle='-', linewidth=1.5)
-plt.text(8, price_floor + 0.16, "Price Floor = 5$", color='magenta', fontsize=8, va='center')
-plt.text(8, price_floor - 0.2, "Shortage = 20 scoops", color='magenta', fontsize=8, va='center')
-
-# Price ceiling line
-plt.axhline(y=price_ceiling, color='purple', linestyle='-', linewidth=1.5)
-plt.text(8, price_ceiling + 0.16, "Price Ceiling = 3$", color='purple', fontsize=8, va='center')
-plt.text(8, price_ceiling - 0.2, "Surplus = 20 scoops", color='purple', fontsize=8, va='center')
-
-
-# Equilibrium line
-plt.axvline(x=equilibrium_quantity, color='red', linestyle='--', linewidth=1)
-plt.axhline(y=equilibrium_price, color='red', linestyle='--', linewidth=1)
-plt.scatter([equilibrium_quantity], [equilibrium_price], color='red', zorder=5, label='Equilibrium Point', s=50)
-
-# Labels and title
-plt.xlabel("Quantity (in scoops)")
-plt.ylabel("Price (in $)")
-# plt.title("Effects of Price Floor and Price Ceiling on the Ice Cream Market")
-plt.legend(fontsize=7, loc='best')
-plt.grid(alpha=0.3)
-
-# Display the plot
-st.pyplot(plt)
+    # Display the plot
+    st.pyplot(plt)
 
 # Explanation of effects
 
