@@ -72,7 +72,7 @@ col1, col2, col3 = st.columns([1, 12, 1])
 with col2:
     # Plotting demand curve only
     plt.figure(figsize=(6, 4))
-    plt.plot(df["Quantity Demanded (in scoops)"], df["Price (in $)"], label="Demand (People want to buy)", color='blue', linewidth=3, alpha=0.4)
+    plt.plot(df["Quantity Demanded (in scoops)"], df["Price (in $)"], label="Demand curve", color='blue', linewidth=3, alpha=0.4)
     plt.xlabel("Quantity Demanded (in scoops)")
     plt.ylabel("Price (in $)")
     # plt.title("Demand Curve for Ice Cream")
@@ -153,15 +153,15 @@ cpl1, col2, col3 = st.columns([1, 12, 1])
 with col2:
     # Plotting supply curve only
     plt.figure(figsize=(6, 4))
-    plt.plot(df["Quantity Supplied (in scoops)"], df["Price (in $)"], label="Supply (Sellers want to sell)", color='green', linewidth=3, alpha=0.4)
+    plt.plot(df["Quantity Supplied (in scoops)"], df["Price (in $)"], label="Supply curve", color='green', linewidth=3, alpha=0.4)
     plt.xlabel("Quantity Supplied (in scoops)")
     plt.ylabel("Price (in $)")
     # plt.title("Supply Curve for Ice Cream")
     plt.grid(alpha=0.3)
-    plt.legend(fontsize=7, loc='best')
     plt.scatter(df["Quantity Supplied (in scoops)"], df["Price (in $)"], color='green', s=50, alpha=0.4)
     # Highlight the operating points
     plt.scatter(quantity_supplied, price, color='green', s=100, zorder=5, label='Current supply')
+    plt.legend(fontsize=7, loc='best')
     # Add annotation for the supply value
     plt.annotate(
         f'{price}$',
@@ -258,7 +258,7 @@ with col2:
 st.markdown("""
 <div style="border: 2px solid #D9E7FF; background-color: #D9E7FF; padding: 10px; border-radius: 5px; margin: 10px 160px; box-shadow: 2px 2px 5px rgba(0.2, 0.2, 0.2, 0.5);">
     <img src="https://img.icons8.com/ios-filled/50/000000/pin.png" alt="Pin" style="width: 20px; height: 20px; margin-right: 10px;">
-    <strong>Surplus</strong> occurs for a product when the price is set too <strong>low</strong>, resulting in the quantity demanded exceeding the quantity supplied
+    <strong>Surplus</strong> occurs for a product when the price is set too <strong>low</strong>, resulting in the quantity demanded exceeding the quantity supplied.
 </div>
 """, unsafe_allow_html=True)
 st.write("")
