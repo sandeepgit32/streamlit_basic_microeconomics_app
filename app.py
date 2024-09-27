@@ -83,7 +83,7 @@ with col2:
     plt.scatter(quantity_demanded, price, color='blue', s=100, zorder=5, label='Current demand')
     # Add annotation for the demand value
     plt.annotate(
-        f'{price}$',
+        f'${price}',
         xy=(quantity_demanded, price),
         xytext=(quantity_demanded-1, price-0.4),
         fontsize=9,
@@ -164,7 +164,7 @@ with col2:
     plt.legend(fontsize=7, loc='best')
     # Add annotation for the supply value
     plt.annotate(
-        f'{price}$',
+        f'${price}',
         xy=(quantity_supplied, price),
         xytext=(quantity_supplied - 1, price+0.4),
         fontsize=9,
@@ -380,7 +380,7 @@ with col2:
 
     # Add annotation for the demand value
     plt.annotate(
-        f'Equilibrium price = {equilibrium_price}$',
+        f'Equilibrium price = ${equilibrium_price}',
         xy=(equilibrium_quantity, equilibrium_price),
         xytext=(equilibrium_quantity - 8, equilibrium_price + 0.5),
         fontsize=9,
@@ -526,8 +526,8 @@ As you can see from the graph:
 st.subheader("🍨 Impact of Increased/Decreased Demand on Equilibrium Price")
 
 st.write("""
-- When demand for ice cream increases (like during a special event), more people want to buy ice cream at every price level. This leads to a shift in the demand curve to the right, which can increase the equilibrium price.
-- When demand for ice cream decreases (like during a cold snap), fewer people want to buy ice cream at every price level. This leads to a shift in the demand curve to the left, which can decrease the equilibrium price.
+- When **demand for ice cream increases** (like during a special event), more people want to buy ice cream at every price level. This leads to a **shift in the demand curve to the right**, which can **increase the equilibrium price**.
+- When **demand for ice cream decreases** (like during a cold snap), fewer people want to buy ice cream at every price level. This leads to a **shift in the demand curve to the left**, which can **decrease the equilibrium price**.
 
 Let's visualize how this change affects the equilibrium point.
 """)
@@ -577,7 +577,7 @@ with col2:
     # Highlighting equilibrium points
     plt.scatter([equilibrium_quantity], [equilibrium_price], color='k', label='Original Equilibrium', s=50)
     if new_equilibrium_quantity is not None and new_equilibrium_price is not None:
-        plt.scatter([new_equilibrium_quantity], [new_equilibrium_price], color='red', label=f'New Equilibrium ({new_equilibrium_price}$, {int(new_equilibrium_quantity)})', s=50)
+        plt.scatter([new_equilibrium_quantity], [new_equilibrium_price], color='red', label=f'New Equilibrium (${new_equilibrium_price}, {int(new_equilibrium_quantity)})', s=50)
 
     plt.xlabel("Quantity (in scoops)")
     plt.ylabel("Price (in $)")
@@ -753,8 +753,8 @@ As you can see from the graph:
 st.subheader("🍨 Impact of Increased/Decreased Supply on Equilibrium Price")
 
 st.write("""
-- When the supply of ice cream increases (like during a bumper harvest), more sellers are willing to sell ice cream at every price level. This leads to a shift in the supply curve to the right, which can decrease the equilibrium price.
-- When the supply of ice cream decreases (like during a supply chain disruption), fewer sellers are willing to sell ice cream at every price level. This leads to a shift in the supply curve to the left, which can increase the equilibrium price.
+- When the **supply of ice cream increases** (like during a bumper harvest), more sellers are willing to sell ice cream at every price level. This leads to a **shift in the supply curve to the right**, which can **decrease the equilibrium price**.
+- When the **supply of ice cream decreases** (like during a supply chain disruption or increased production costs), fewer sellers are willing to sell ice cream at every price level. This leads to a **shift in the supply curve to the left**, which can **increase the equilibrium price**.
 
 Let's visualize how this change affects the equilibrium point.
 """)
@@ -804,7 +804,7 @@ with col2:
     # Highlighting equilibrium points
     plt.scatter([equilibrium_quantity], [equilibrium_price], color='k', label='Original Equilibrium', s=50)
     if new_equilibrium_quantity_supply is not None and new_equilibrium_price_supply is not None:
-        plt.scatter([new_equilibrium_quantity_supply], [new_equilibrium_price_supply], color='red', label=f'New Equilibrium ({new_equilibrium_price_supply}$, {int(new_equilibrium_quantity_supply)})', s=50)
+        plt.scatter([new_equilibrium_quantity_supply], [new_equilibrium_price_supply], color='red', label=f'New Equilibrium (${new_equilibrium_price_supply}, {int(new_equilibrium_quantity_supply)})', s=50)
 
     plt.xlabel("Quantity (in scoops)")
     plt.ylabel("Price (in $)")
@@ -871,9 +871,9 @@ st.subheader("🍨 Government Interventions - Price Floor and Ceiling")
 st.write("""
 Sometimes governments intervene to control prices. Let's see how two interventions – **price ceilings** and **price floors** – affect the market and what unintended consequences may arise:
 
-- If the government thinks ice cream sellers are not getting proper price for their ice cream, it might impose a **price floor** above the equilibrium price, for example, at $5. While sellers would love to sell at such a high price, buyers aren't willing to purchase as much. This leads to a surplus of 20 scoops, with unsold ice cream piling up. Sellers may be tempted to sell scoops illegally below the floor price, creating **black market** conditions.
+- If the government thinks ice cream sellers are not getting proper price for their ice cream, it might impose a **price floor** above the equilibrium price, for example, at **\$5**. While sellers would love to sell at such a high price, buyers aren't willing to purchase as much. This leads to a surplus of **20 scoops**, with unsold ice cream piling up. Sellers may be tempted to sell scoops illegally below the floor price, creating **black market** conditions.
 
-- On the other hand, if the government thinks ice cream is too expensive for everyone to afford, it may set a **price ceiling** below the equilibrium price, say  at $3. While this makes ice cream cheaper for buyers, it creates a shortage of 20 scoopps because at such a low price, sellers aren't willing to supply enough scoops. This scarcity can lead to **black markets**, where people sell ice cream illegally at higher prices.
+- On the other hand, if the government thinks ice cream is too expensive for everyone to afford, it may set a **price ceiling** below the equilibrium price, say  at **\$3**. While this makes ice cream cheaper for buyers, it creates a shortage of **20 scoopps** because at such a low price, sellers aren't willing to supply enough scoops. This scarcity can lead to **black markets**, where people sell ice cream illegally at higher prices.
 """)
 
 # User inputs for price floor and price ceiling
@@ -904,12 +904,12 @@ with col2:
 
     # Price floor line
     plt.axhline(y=price_floor, color='magenta', linestyle='-', linewidth=1.5, alpha=0.4)
-    plt.text(8, price_floor + 0.16, "Price Floor = 5$", color='magenta', fontsize=8, va='center')
+    plt.text(8, price_floor + 0.16, f"Price Floor = ${price_floor}", color='magenta', fontsize=8, va='center')
     plt.text(8, price_floor - 0.2, f"Shortage = {shortage} scoops", color='magenta', fontsize=8, va='center')
 
     # Price ceiling line
     plt.axhline(y=price_ceiling, color='purple', linestyle='-', linewidth=1.5, alpha=0.4)
-    plt.text(8, price_ceiling + 0.16, "Price Ceiling = 3$", color='purple', fontsize=8, va='center')
+    plt.text(8, price_ceiling + 0.16, f"Price Ceiling = ${price_ceiling}", color='purple', fontsize=8, va='center')
     plt.text(8, price_ceiling - 0.2, f"Surplus = {surplus} scoops", color='purple', fontsize=8, va='center')
 
 
@@ -943,67 +943,199 @@ st.markdown("""
 st.write("")
 
 
-# # Tax impact section
-# st.subheader("🍨 Effect of Tax on Supply and Demand")
+# Section for tax levied on sellers
+st.subheader("🍨 Impact of Tax Imposed on Seller")
 
-# st.write("""
-# When a tax is imposed on ice cream sellers, it increases their costs. This typically leads to a leftward shift in the supply curve, resulting in a higher equilibrium price and lower equilibrium quantity.
+st.write("""
+When the government imposes a **tax on the seller**, the **supply curve shifts upward** by the amount of the tax because the tax increases the cost of producing or selling each unit of the good. Sellers now need a higher price to cover these additional costs, so for any given quantity. 
+         
+For example, you can see that without the tax, sellers are willing to offer **40 scoops** for **\$4** per ice cream. So with a **\$1** tax, they will offer **40 scoops** only if the price is **\$5** (original price **\$4** + tax **\$1**) per ice cream. Let's visualize how this affects the supply and demand curves.
+""")
 
-# Let's visualize how this change affects the equilibrium point.
-# """)
+# User input for tax amount on sellers
+tax_on_sellers = st.slider("Tax Amount Imposed on Sellers (in $)", min_value=0, max_value=5, value=1, step=1)
 
-# # User input for tax amount
-# tax_amount = 1
+# Calculate new supply based on the tax on sellers
+df["Price with Tax on Sellers (in $)"] = df["Price (in $)"] + tax_on_sellers
 
-# # Calculate new supply quantities based on tax
-# df["Quantity Supplied After Tax (in scoops)"] = df["Quantity Supplied (in scoops)"] - tax_amount * 10  # Adjust quantity for tax impact
+def find_intersection_with_seller_tax(df):
+    for i in range(len(df) - 1):
+        if (df["Quantity Supplied (in scoops)"][i] >= df["Quantity Demanded (in scoops)"][i] and
+            df["Quantity Supplied (in scoops)"][i + 1] <= df["Quantity Demanded (in scoops)"][i + 1]) or \
+           (df["Quantity Supplied (in scoops)"][i] <= df["Quantity Demanded (in scoops)"][i] and
+            df["Quantity Supplied (in scoops)"][i + 1] >= df["Quantity Demanded (in scoops)"][i + 1]):
+            # Linear interpolation to find the exact intersection point
+            x1, y1 = df["Quantity Supplied (in scoops)"][i], df["Price with Tax on Sellers (in $)"][i]
+            x2, y2 = df["Quantity Supplied (in scoops)"][i + 1], df["Price with Tax on Sellers (in $)"][i + 1]
+            x3, y3 = df["Quantity Demanded (in scoops)"][i], df["Price (in $)"][i]
+            x4, y4 = df["Quantity Demanded (in scoops)"][i + 1], df["Price (in $)"][i + 1]
+            
+            # Calculate intersection point
+            denom = (x1 - x2) * (y3 - y4) - (y1 - y2) * (x3 - x4)
+            if denom == 0:
+                continue  # Lines are parallel
+            
+            intersect_x = ((x1 * y2 - y1 * x2) * (x3 - x4) - (x1 - x2) * (x3 * y4 - y3 * x4)) / denom
+            intersect_y = ((x1 * y2 - y1 * x2) * (y3 - y4) - (y1 - y2) * (x3 * y4 - y3 * x4)) / denom
+            
+            return intersect_x, intersect_y
+    return None, None
 
-# # Plotting the demand and supply curves with tax effect
-# plt.figure(figsize=(6, 4))
+# Find the new equilibrium point with tax on sellers
+new_equilibrium_quantity_sellers, new_equilibrium_price_sellers = find_intersection_with_seller_tax(df)
 
-# # Demand curve
-# plt.plot(df["Quantity Demanded (in scoops)"], df["Price (in $)"], label="Demand", color='blue', linewidth=3)
-# # Original supply curve
-# plt.plot(df["Quantity Supplied (in scoops)"], df["Price (in $)"], label="Original Supply", color='green', linestyle='--', linewidth=3)
-# # Supply curve after tax
-# plt.plot(df["Quantity Supplied After Tax (in scoops)"], df["Price (in $)"], label="Supply After Tax", color='orange', linewidth=3)
+col1, col2, col3 = st.columns([1, 12, 1])
 
-# # Highlighting equilibrium points
-# plt.scatter([equilibrium_quantity], [equilibrium_price], color='k', label='Original Equilibrium Point', s=50)
-# new_equilibrium_price = 4.5  # Adjusted equilibrium price
-# new_equilibrium_quantity = 35  # Adjusted equilibrium quantity
+with col2:
+    # Plotting original and new supply curves with tax on sellers
+    plt.figure(figsize=(6, 4))
+    plt.plot(df["Quantity Supplied (in scoops)"], df["Price (in $)"], label="Original Supply", color='green', linestyle='--', linewidth=3, alpha=0.4)  # Dotted line for original supply
+    plt.plot(df["Quantity Supplied (in scoops)"], df["Price with Tax on Sellers (in $)"], label="Supply with Tax on Sellers", color='green', linewidth=3, alpha=0.4)  # Solid line for supply with tax on sellers
+    plt.plot(df["Quantity Demanded (in scoops)"], df["Price (in $)"], label="Original Demand", color='blue', linewidth=3, alpha=0.4)  # Dotted line for original demand
 
-# # Labels and title
-# plt.xlabel("Quantity (in scoops)")
-# plt.ylabel("Price (in $)")
-plt.title("Effects of Tax on Ice Cream Market")
-# plt.axhline(new_equilibrium_price, color='red', linestyle='--', linewidth=1)
-# plt.axvline(new_equilibrium_quantity, color='red', linestyle='--', linewidth=1)
-# plt.scatter([new_equilibrium_quantity], [new_equilibrium_price], color='red', label='New Equilibrium Point', s=50)
-# plt.legend(fontsize=7, loc='best')
-# plt.grid(alpha=0.3)
+    # Highlighting equilibrium points
+    plt.scatter([equilibrium_quantity], [equilibrium_price], color='k', label='Original Equilibrium', s=50)
+    if new_equilibrium_quantity_sellers is not None and new_equilibrium_price_sellers is not None:
+        plt.scatter([new_equilibrium_quantity_sellers], [new_equilibrium_price_sellers], color='red', label=f'New Equilibrium (${new_equilibrium_price_sellers}, {int(new_equilibrium_quantity_sellers)})', s=50)
 
-# # Display the plot
-# st.pyplot(plt)
+    plt.xlabel("Quantity (in scoops)")
+    plt.ylabel("Price (in $)")
+    # plt.title("Impact of Tax on Sellers")
+    plt.legend(fontsize=7, loc='best')
+    plt.grid(alpha=0.3)
 
-# st.write("""
-# In the chart:
-# - The **blue curve** represents the demand for ice cream.
-# - The **dotted green curve** shows the original supply of ice cream.
-# - The **orange curve** shows the new supply after the tax is imposed.
+    # Add annotations for each supply point
+    for i in range(len(df)):
+        plt.annotate(
+            f'${df["Price (in $)"][i]}',
+            xy=(df["Quantity Supplied (in scoops)"][i], df["Price (in $)"][i]),
+            xytext=(df["Quantity Supplied (in scoops)"][i]-1, df["Price (in $)"][i]+0.3),
+            fontsize=9,
+            verticalalignment='center'
+        )
 
-# As a result of the tax:
-# - The original equilibrium point is marked in **black**, where the original demand and supply intersect.
-# - The new equilibrium point is marked in **red**, where the new supply intersects with the same demand curve.
+    # Add annotations for each supply point with tax on sellers
+    for i in range(len(df)):
+        plt.annotate(
+            f'${df["Price with Tax on Sellers (in $)"][i]}',
+            xy=(df["Quantity Supplied (in scoops)"][i], df["Price with Tax on Sellers (in $)"][i]),
+            xytext=(df["Quantity Supplied (in scoops)"][i]-1, df["Price with Tax on Sellers (in $)"][i]+0.3),
+            fontsize=9,
+            verticalalignment='center'
+        )
 
-# This shift indicates that at the new equilibrium, the price of ice cream is higher due to the tax, demonstrating how markets respond to taxation!
-# """)
+    # Display the tax impact plot for sellers
+    st.pyplot(plt)
 
-# st.markdown("""
-# <div style="border: 2px solid #D9E7FF; background-color: #D9E7FF; padding: 10px; border-radius: 5px; margin: 10px 160px; box-shadow: 2px 2px 5px rgba(0.2, 0.2, 0.2, 0.5);">
-#     <img src="https://img.icons8.com/ios-filled/50/000000/pin.png" alt="Pin" style="width: 20px; height: 20px; margin-right: 10px;">
-#     When a tax is imposed, it not only raises the price for consumers but also reduces the quantity sold in the market.
-# </div>
-# """, unsafe_allow_html=True)
 
-# st.write("")
+st.write("")
+
+st.write(f"""
+- Original price per ice cream = **\$4**
+
+- The price paid by buyers per ice cream = **\${new_equilibrium_price_sellers}** (market price)
+         
+- The price received by sellers per ice cream after deducting **\${tax_on_sellers}** tax = **\${new_equilibrium_price_sellers}** - **\${tax_on_sellers}** = **\${new_equilibrium_price_sellers-tax_on_sellers}**
+
+So the buyers pay **\${new_equilibrium_price_sellers-4}** of the tax and seller pay the other **\${4 - new_equilibrium_price_sellers + tax_on_sellers}**. **Although the tax is levied on sellers, the buyers end up paying a portion of it**. The tax burden is divided between buyers and seller. The division is equal in this case which may not always be the case.
+""")
+
+
+# Section for tax levied on buyers
+st.subheader("🍨 Impact of Tax Imposed on Buyers")
+
+st.write("""
+When the government imposes a tax on buyers, the demand curve shifts downward by the amount of the tax because the tax increases the total cost of purchasing each unit of the good. Buyers now face a higher total cost for each unit, which includes the market price plus the tax. For any given price before tax, buyers are willing to buy less of the good because the total cost has increased. 
+         
+For example, without the tax, buyers are willing to purchase ****40 scoops**** at ****\$4**** per ice cream. With a ****\$1**** tax, they will only buy ****40 scoops**** if the price they see in the market is ****\$3**** per ice cream, as their total cost (including the tax) would still be ****\$4****. Let's visualize how this affects the supply and demand curves.
+""")
+
+# User input for tax amount on buyers
+tax_on_buyers = st.slider("Tax Amount Imposed on Buyers (in $)", min_value=0, max_value=5, value=1, step=1)
+
+# Calculate new demand based on the tax on buyers
+df["Price with Tax on Buyers (in $)"] = df["Price (in $)"] - tax_on_buyers
+
+def find_intersection_with_buyer_tax(df):
+    for i in range(len(df) - 1):
+        if (df["Quantity Supplied (in scoops)"][i] >= df["Quantity Demanded (in scoops)"][i] and
+            df["Quantity Supplied (in scoops)"][i + 1] <= df["Quantity Demanded (in scoops)"][i + 1]) or \
+           (df["Quantity Supplied (in scoops)"][i] <= df["Quantity Demanded (in scoops)"][i] and
+            df["Quantity Supplied (in scoops)"][i + 1] >= df["Quantity Demanded (in scoops)"][i + 1]):
+            # Linear interpolation to find the exact intersection point
+            x1, y1 = df["Quantity Supplied (in scoops)"][i], df["Price (in $)"][i]
+            x2, y2 = df["Quantity Supplied (in scoops)"][i + 1], df["Price (in $)"][i + 1]
+            x3, y3 = df["Quantity Demanded (in scoops)"][i], df["Price with Tax on Buyers (in $)"][i]
+            x4, y4 = df["Quantity Demanded (in scoops)"][i + 1], df["Price with Tax on Buyers (in $)"][i + 1]
+            
+            # Calculate intersection point
+            denom = (x1 - x2) * (y3 - y4) - (y1 - y2) * (x3 - x4)
+            if denom == 0:
+                continue  # Lines are parallel
+            
+            intersect_x = ((x1 * y2 - y1 * x2) * (x3 - x4) - (x1 - x2) * (x3 * y4 - y3 * x4)) / denom
+            intersect_y = ((x1 * y2 - y1 * x2) * (y3 - y4) - (y1 - y2) * (x3 * y4 - y3 * x4)) / denom
+            
+            return intersect_x, intersect_y
+    return None, None
+
+# Find the new equilibrium point with tax on buyers
+new_equilibrium_quantity_buyers, new_equilibrium_price_buyers = find_intersection_with_buyer_tax(df)
+
+col1, col2, col3 = st.columns([1, 12, 1])
+
+with col2:
+    # Plotting original and new demand curves with tax on buyers
+    plt.figure(figsize=(6, 4))
+    plt.plot(df["Quantity Supplied (in scoops)"], df["Price (in $)"], label="Original Supply", color='green', linewidth=3, alpha=0.4)  # Dotted line for original supply
+    plt.plot(df["Quantity Demanded (in scoops)"], df["Price (in $)"], label="Original Demand", color='blue', linestyle='--', linewidth=3, alpha=0.4)  # Dotted line for original demand
+    plt.plot(df["Quantity Demanded (in scoops)"], df["Price with Tax on Buyers (in $)"], label="Demand with Tax on Buyers", color='blue', linewidth=3, alpha=0.4)  # Solid line for demand with tax on buyers
+
+    # Highlighting equilibrium points
+    plt.scatter([equilibrium_quantity], [equilibrium_price], color='k', label='Original Equilibrium', s=50)
+    plt.scatter([new_equilibrium_quantity_buyers], [new_equilibrium_price_buyers], color='red', label=f'New Equilibrium (${new_equilibrium_price_buyers}, {int(new_equilibrium_quantity_buyers)})', s=50)
+
+    plt.xlabel("Quantity (in scoops)")
+    plt.ylabel("Price (in $)")
+    # plt.title("Impact of Tax on Buyers")
+    plt.legend(fontsize=7, loc='best')
+    plt.grid(alpha=0.3)
+
+    # Add annotations for each demand point with tax on buyers
+    for i in range(len(df)):
+        plt.annotate(
+            f'${df["Price with Tax on Buyers (in $)"][i]}',
+            xy=(df["Quantity Demanded (in scoops)"][i], df["Price with Tax on Buyers (in $)"][i]),
+            xytext=(df["Quantity Demanded (in scoops)"][i]-1, df["Price with Tax on Buyers (in $)"][i]+0.3),
+            fontsize=9,
+            verticalalignment='center'
+        )
+        plt.annotate(
+            f'${df["Price (in $)"][i]}',
+            xy=(df["Quantity Demanded (in scoops)"][i], df["Price with Tax on Buyers (in $)"][i]),
+            xytext=(df["Quantity Demanded (in scoops)"][i]-1, df["Price (in $)"][i]+0.3),
+            fontsize=9,
+            verticalalignment='center'
+        )
+
+    # Display the tax impact plot for buyers
+    st.pyplot(plt)
+
+st.write("")
+
+st.write(f"""
+- Original price per ice cream = **\$4**
+
+- The price received by seller per ice cream = **\${new_equilibrium_price_buyers}** (market price)
+
+- The total price paid by buyers per ice cream including **\${tax_on_buyers}** tax = **\${new_equilibrium_price_buyers}** + **\${tax_on_buyers}** = **\${new_equilibrium_price_buyers + tax_on_buyers}**
+
+So the buyers pay **\${new_equilibrium_price_buyers + tax_on_buyers - 4}** of the tax and seller pay the other **\${4 - new_equilibrium_price_buyers}**. **Although the tax is levied on buyers, the sellers end up paying a portion of it**. The division of tax burden between buyers and seller is equal in this case but may not always be true.
+""")
+
+st.markdown("""
+<div style="border: 2px solid #D9E7FF; background-color: #D9E7FF; padding: 10px; border-radius: 5px; margin: 10px 160px; box-shadow: 2px 2px 5px rgba(0.2, 0.2, 0.2, 0.5);">
+    <img src="https://img.icons8.com/ios-filled/50/000000/pin.png" alt="Pin" style="width: 20px; height: 20px; margin-right: 10px;">
+    When a <strong>tax</strong> is imposed on either buyers or seller, the burden is <strong>shared between both parties</strong>.
+</div>
+""", unsafe_allow_html=True)
