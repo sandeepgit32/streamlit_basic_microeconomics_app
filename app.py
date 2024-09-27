@@ -533,7 +533,7 @@ Let's visualize how this change affects the equilibrium point.
 """)
 
 # User input for demand shift
-demand_shift = st.slider("Demand Shift (in scoops)", min_value=-40, max_value=40, value=0, step=10)
+demand_shift = st.slider("Demand Shift (in scoops)", min_value=-40, max_value=40, value=10, step=10)
 
 # Calculate new demand based on the shift
 df["New Quantity Demanded (in scoops)"] = df["Quantity Demanded (in scoops)"] + demand_shift
